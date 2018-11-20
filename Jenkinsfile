@@ -7,12 +7,16 @@ pipeline {
   }
   environment {
     DEPLOY_NAMESPACE = "swad-staging"
+    TILLER_NAMESPACE = "kube-system"
+    HTTP_PROXY = "http://172.22.100.64:5865"
+    NO_PROXY = "jenkins-x*,.local,jenkins-x-chartmuseum,10.0.0.0/8"
   }
   stages {
     stage('Validate Environment') {
       steps {
         container('maven') {
           dir('env') {
+            sh 'helm init --client-only --service-account tiller'
             sh 'jx step helm build'
           }
         }
