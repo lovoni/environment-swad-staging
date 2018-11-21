@@ -1,6 +1,6 @@
 CHART_REPO := http://jenkins-x-chartmuseum:8080
 DIR := "env"
-NAMESPACE := "swad-staging"
+NAMESPACE := "teama-staging"
 OS := $(shell uname)
 
 build: clean
